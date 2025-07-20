@@ -5,7 +5,6 @@ def generate_zsh_completion(opts_map, cmd):
     - opts_map: dictionary of {option: [suboption, ...], ...}
     - cmd: name of the command (e.g., 'es2panda')
     """
-    # Prepare a list of all main options as strings with '--' prefix
     options = [f'--{opt}' for opt in opts_map]
 
     # Begin Zsh completion script lines
@@ -19,7 +18,6 @@ def generate_zsh_completion(opts_map, cmd):
     lines.append("  if [[ $cur == --*: ]]; then")
     # Extract the main option, e.g. --foo from --foo:bar
     lines.append("    local mainopt=\"${cur%%:*}\"")
-    # Array to store suboptions
     lines.append("    local subopts=()")
     # For each option with suboptions, assign subopts if the current option matches
     for opt, subs in opts_map.items():

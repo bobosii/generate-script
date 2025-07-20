@@ -29,7 +29,6 @@ def collect_options(config):
     opts = {}
     def rec(node):
         if isinstance(node, dict):
-            # Get the option name, if present in this dict
             name = node.get('name')
             subs = None
             # Look for a key that looks like 'sub_options', 'suboptions', etc.
@@ -83,13 +82,11 @@ def main():
     )
     args = parser.parse_args()
 
-    # Load the YAML configuration
     cfg = load_yaml(args.config)
 
     # Extract all options and suboptions from the config
     opts_map = collect_options(cfg)
 
-    # Generate and print the completion script for each requested shell
     for sh in args.shell:
         if sh == 'bash':
             print(generate_bash_completion(opts_map, args.cmd))
