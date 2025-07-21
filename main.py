@@ -49,7 +49,6 @@ def collect_options(config):
             # If the node is a list, recurse into each item
             for item in node:
                 rec(item)
-    # Start recursion from the root of the YAML structure
     rec(config)
     # Remove duplicates and sort suboptions for each option
     for k in opts:
